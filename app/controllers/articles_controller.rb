@@ -13,13 +13,15 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.save
-		# redirect_to articles_path
 		flash.notice = "Article '#{@article.title}' created!"
 		redirect_to article_path(@article)
 	end
 
 	def show
 		@article = Article.find(params[:id])
+		# byebug
+		@comment = Comment.new
+		@comment.article_id = @article.id
 	end
 
 	def destroy				# Rails destroy == HTML delete
